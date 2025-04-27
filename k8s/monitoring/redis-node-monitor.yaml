@@ -1,7 +1,8 @@
-apiVersion: monitoring.coreos.com/v1
+yapiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: redis-node-monitor
+  namespace: monitoring
   labels:
     release: prom-stack
 spec:
@@ -14,5 +15,5 @@ spec:
   endpoints:
     - port: http
       path: /metrics
-      interval: 10s
+      interval: 15s
 

@@ -16,18 +16,26 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:7
+          image: redis
           args: ["--replicaof", "redis-master", "6379"]
           ports:
             - containerPort: 6379
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: redis-replicas
 spec:
+  ports:
+    - port: 6379
   selector:
     app: redis
     role: replica
-  ports:
-    - port: 6379
+
